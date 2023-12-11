@@ -34,14 +34,11 @@ def copy_record(source_file, destination_file, row_number):
         return
     
     record_to_copy = source_records[row_number - 1]
-    
-    if not exists(destination_file):
-        create_file(destination_file)
 
     destination_records = read_file(destination_file)
     destination_records.append(record_to_copy)
     
-    with open(destination_file, "a", encoding='utf-8') as data:
+    with open(destination_file, "w", encoding='utf-8') as data:
         f_writer = DictWriter(data, fieldnames=["Имя", "Фамилия", "Номер телефона"])
         f_writer.writeheader()
         f_writer.writerows(destination_records)
